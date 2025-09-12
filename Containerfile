@@ -25,13 +25,10 @@ RUN containerd config default > /etc/containerd/config.toml
 RUN sed -i 's/imports = .*/imports = ["\/etc\/containerd\/config.d\/*.toml"]/' /etc/containerd/config.toml
 
 # Prep directories for Kubernetes
-RUN << DIRS
-    for path in /var/lib/etcd /etc/kubernetes/pki /etc/kubernetes/pki/etcd /etc/cni/net.d
-    do
-        mkdir -vp $path && chcon -vt svirt_sandbox_file_t $path
+RUN for path in /var/lib/etcd /etc/kubernetes/pki /etc/kubernetes/pki/etcd /etc/cni/net.d; \
+    do \
+      mkdir -vp $path && chcon -vt svirt_sandbox_file_t $path; \
     done
-DIRS
-
 
 # Disable SELinux
 # SELinux causes some issues
