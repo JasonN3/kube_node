@@ -33,7 +33,7 @@ RUN sed -i 's/imports = .*/imports = ["\/etc\/containerd\/config.d\/*.toml"]/' /
 # Disable SELinux
 # SELinux causes some issues
 # I haven't tested it in a few versions, so this may be able to be enabled again
-sed -i 's/SELINUX=.*/SELINUX=permissive/' /etc/selinux/config
+RUN sed -i 's/SELINUX=.*/SELINUX=permissive/' /etc/selinux/config
 
 # Enable bootupd-auto service
 # This service will automatically run `bootupctl update`
