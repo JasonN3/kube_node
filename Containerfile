@@ -2,6 +2,9 @@ FROM quay.io/fedora/fedora-coreos@sha256:9ccaf584660e7acf63f7f6658c13a3adf97e88f
 
 COPY rootfs/ /
 
+# Install general packages
+RUN dnf install -y jq udisks2
+
 # Replace VERSION in /etc/yum.repos.d/kubernetes.repo with the latest major and minor version of Kubernetes
 RUN curl -s https://api.github.com/repos/kubernetes/kubernetes/releases/latest \
     | jq -r '.tag_name' \
