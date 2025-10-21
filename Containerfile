@@ -13,7 +13,7 @@ RUN curl -s https://api.github.com/repos/kubernetes/kubernetes/releases/latest \
 
 
 # Install packages for Kubernetes
-RUN dnf install -y containernetworking-plugins kubeadm kubelet
+RUN dnf install -y containerd containernetworking-plugins kubeadm kubelet
 
 # Enable services for Kubernetes
 RUN systemctl enable \
@@ -21,7 +21,7 @@ RUN systemctl enable \
         kubelet.service
 
 # Disable Docker
-RUN systemctl disable docker.socket
+RUN systemctl is-enabled docker.socket && systemctl disable docker.socket
 
 # Create containerd config files
 RUN containerd config default > /etc/containerd/config.toml

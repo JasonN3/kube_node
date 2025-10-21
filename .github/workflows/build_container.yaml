@@ -57,10 +57,11 @@ jobs:
         uses: redhat-actions/buildah-build@v2
         with:
           containerfiles: Containerfile
-          tags: ${{ steps.meta.outputs.tags || steps.meta_pr.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels || steps.meta_pr.outputs.labels }}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
 
       - name: Push image
+        if: github.event_name != 'pull_request' || (github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository)
         uses: redhat-actions/push-to-registry@v2
         with:
           image: ${{ steps.build-image.outputs.image }}
@@ -79,11 +80,19 @@ jobs:
 
   combine-tags:
     name: Combine Tags
+    if: github.event_name != 'pull_request' || (github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository)
     runs-on: ubuntu-24.04
     needs: build-container
     permissions:
       packages: write
     steps:
+      - name: Podman login to GHCR
+        uses: redhat-actions/podman-login@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ github.token }}
+
       - name: Docker meta
         id: meta
         uses: docker/metadata-action@v5
@@ -109,6 +118,7 @@ jobs:
               docker://${tag}-arm64 \
               --arch arm64
           done
+
       - name: Push manifest
         uses: redhat-actions/push-to-registry@v2
         with:
