@@ -21,7 +21,10 @@ RUN systemctl enable \
         kubelet.service
 
 # Disable Docker
-RUN systemctl is-enabled docker.socket && systemctl disable docker.socket
+RUN if systemctl is-enabled docker.socket 2>/dev/null; \
+    then \
+      systemctl disable docker.socket; \
+    fi
 
 # Create containerd config files
 RUN containerd config default > /etc/containerd/config.toml && \
