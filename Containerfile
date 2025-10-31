@@ -24,8 +24,9 @@ RUN systemctl enable \
 RUN systemctl is-enabled docker.socket && systemctl disable docker.socket
 
 # Create containerd config files
-RUN containerd config default > /etc/containerd/config.toml
-RUN sed -i 's/imports = .*/imports = ["\/etc\/containerd\/config.d\/*.toml"]/' /etc/containerd/config.toml
+RUN containerd config default > /etc/containerd/config.toml && \
+    mkdir -p /etc/containerd/config.d && \
+    sed -i 's/imports = .*/imports = ["\/etc\/containerd\/config.d\/*.toml"]/' /etc/containerd/config.toml
 
 # Prep directories for Kubernetes
 #RUN for path in /var/lib/etcd /etc/kubernetes/pki /etc/kubernetes/pki/etcd /etc/cni/net.d; \
