@@ -1,4 +1,4 @@
-FROM quay.io/fedora/fedora-coreos:stable@sha256:c39e73eff276872c698a53f54f91ba47621af9103b61a4b66f6c715003e598ff
+FROM quay.io/fedora/fedora-coreos:stable
 
 COPY rootfs/ /
 
