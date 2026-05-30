@@ -1,9 +1,9 @@
 FROM quay.io/fedora/fedora-coreos:stable
 
-COPY rootfs/ /
-
 # Install general packages
 RUN dnf install -y jq udisks2
+
+COPY rootfs/ /
 
 # Replace VERSION in /etc/yum.repos.d/kubernetes.repo with the latest major and minor version of Kubernetes
 RUN curl -s https://api.github.com/repos/kubernetes/kubernetes/releases/latest \
