@@ -42,6 +42,9 @@ RUN containerd config default > /etc/containerd/config.toml && \
 # I haven't tested it in a few versions, so this may be able to be enabled again
 RUN sed -i 's/SELINUX=.*/SELINUX=permissive/' /etc/selinux/config
 
+# Ensure packages for filesystems are installed
+RUN dnf install -y btrfs-progs
+
 # Enable bootupd-auto service
 # This service will automatically run `bootupctl update`
 # on start to keep all components updates
