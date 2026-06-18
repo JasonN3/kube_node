@@ -1,0 +1,38 @@
+name: Update Containerfile Base Image
+
+on:
+  schedule:
+    # Weekly on Sunday at 06:00 UTC
+    - cron: "0 6 * * 0"
+  workflow_dispatch:
+
+jobs:
+  update-containerfile:
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Fetch latest Fedora CoreOS tag
+        id: fedora-coreos
+        run: |
+          tag=$(curl -fsSL https://raw.githubusercontent.com/coreos/fedora-coreos-streams/refs/heads/main/streams/stable.json | jq -r '.architectures.x86_64.artifacts.metal.release')
+          echo "tag=$tag" >> "$GITHUB_OUTPUT"
+
+      - name: Update Containerfile
+        run: |
+          sed -i "1s|^FROM quay.io/fedora/fedora-coreos:.*|FROM quay.io/fedora/fedora-coreos:${{ steps.fedora-coreos.outputs.tag }}|" Containerfile
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          commit-message: "chore: update Fedora CoreOS base image to ${{ steps.fedora-coreos.outputs.tag }}"
+          branch: chore/update-fedora-coreos-base-image
+          title: "chore: update Fedora CoreOS base image to ${{ steps.fedora-coreos.outputs.tag }}"
+          body: |
+            Update the Containerfile base image to Fedora CoreOS release `${{ steps.fedora-coreos.outputs.tag }}`.
+          labels: |
+            dependencies
