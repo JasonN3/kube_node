@@ -26,16 +26,13 @@ RUN if systemctl is-enabled docker.socket 2>/dev/null; \
       systemctl disable docker.socket; \
     fi
 
+# Add python for cephadm
+RUN dnf install -y python3
+
 # Create containerd config files
 RUN containerd config default > /etc/containerd/config.toml && \
     mkdir -p /etc/containerd/config.d && \
     sed -i 's/imports = .*/imports = ["\/etc\/containerd\/config.d\/*.toml"]/' /etc/containerd/config.toml
-
-# Prep directories for Kubernetes
-#RUN for path in /var/lib/etcd /etc/kubernetes/pki /etc/kubernetes/pki/etcd /etc/cni/net.d; \
-#    do \
-#      mkdir -vp $path && chcon -vt svirt_sandbox_file_t $path; \
-#    done
 
 # Disable SELinux
 # SELinux causes some issues
