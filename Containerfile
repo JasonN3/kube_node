@@ -1,4 +1,4 @@
-FROM quay.io/fedora/fedora-coreos:45.20260819.91.1
+FROM quay.io/fedora/fedora-coreos:45.20260820.91.1
 
 # Install general packages
 RUN dnf install -y jq udisks2
