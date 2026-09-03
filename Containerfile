@@ -8,7 +8,7 @@ RUN dnf remove -y NetworkManager chrony
 
 # Install and enable systemd utilities
 RUN dnf install -y systemd-networkd && \
-    systemctl enable --now systemd-networkd systemd-timesyncd
+    systemctl enable systemd-networkd systemd-timesyncd
 
 COPY rootfs/ /
 
