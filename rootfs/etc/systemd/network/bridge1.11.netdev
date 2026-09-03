@@ -1,0 +1,6 @@
+[NetDev]
+Name=bridge1.11
+Kind=vlan
+
+[VLAN]
+Id=11
