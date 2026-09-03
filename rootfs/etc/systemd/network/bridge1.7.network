@@ -1,0 +1,10 @@
+[Match]
+Name=bridge1.7
+
+[Link]
+MTUBytes=1500
+
+[Network]
+DHCP=true
+IPv6AcceptRA=yes
+

@@ -1,0 +1,7 @@
+[NetDev]
+Name=bridge1.7
+Kind=vlan
+
+[VLAN]
+Id=7
+Parent=bridge1

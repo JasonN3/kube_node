@@ -1,0 +1,11 @@
+[Match]
+Name=en*
+Driver=!igc
+
+[Network]
+Bond=bond0
+LLDP=routers-only
+EmitLLDP=nearest-bridge
+
+[Link]
+MTUBytes=1570
