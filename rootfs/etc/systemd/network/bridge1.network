@@ -1,6 +1,13 @@
 [Match]
 Name=bridge1
 
+[BridgeVLAN]
+VLAN=3
+VLAN=5
+VLAN=7
+VLAN=11
+VLAN=4002
+
 [Network]
 LinkLocalAddressing=no
 IPv6AcceptRA=no

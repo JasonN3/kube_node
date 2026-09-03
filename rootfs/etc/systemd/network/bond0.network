@@ -3,9 +3,6 @@ Name=bond0
 
 [Network]
 Bridge=bridge1
-LinkLocalAddressing=no
-IPv6AcceptRA=no
-DHCP=no
 
 [Link]
 MTUBytes=1570

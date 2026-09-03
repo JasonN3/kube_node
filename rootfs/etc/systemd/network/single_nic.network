@@ -16,7 +16,3 @@ VLAN=5
 VLAN=7
 VLAN=11
 VLAN=4002
-
-LinkLocalAddressing=no
-IPv6AcceptRA=no
-DHCP=no
