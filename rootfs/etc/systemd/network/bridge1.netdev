@@ -1,3 +1,8 @@
 [NetDev]
 Name=bridge1
 Kind=bridge
+
+[Bridge]
+DefaultPVID=0
+STP=false
+VLANFiltering=true

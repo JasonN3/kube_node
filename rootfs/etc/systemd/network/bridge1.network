@@ -5,16 +5,8 @@ Name=bridge1
 LinkLocalAddressing=no
 IPv6AcceptRA=no
 DHCP=no
-
-[Bridge]
-STP=false
-VLANFiltering=true
-DefaultPVID=0
-VLAN=3
-VLAN=5
-VLAN=7
-VLAN=11
-VLAN=4002
+VLAN=bridge1.7
+VLAN=bridge1.11
 
 [Link]
 MTUBytes=1570

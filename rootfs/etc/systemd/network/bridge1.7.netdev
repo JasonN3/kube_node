@@ -4,4 +4,3 @@ Kind=vlan
 
 [VLAN]
 Id=7
-Parent=bridge1
