@@ -4,7 +4,7 @@ FROM quay.io/fedora/fedora-coreos:stable@sha256:af3ebad95f7f17771a79fc194edaa811
 RUN dnf install -y jq udisks2
 
 # Ensure systemd replaced utilities are not installed
-RUN dnf remove -y NetworkManager chronyd
+RUN dnf remove -y NetworkManager chrony
 
 # Install and enable systemd utilities
 RUN dnf install -y systemd-networkd && \
