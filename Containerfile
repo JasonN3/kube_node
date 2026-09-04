@@ -3,6 +3,9 @@ FROM quay.io/fedora/fedora-coreos:stable@sha256:39a8d0746bed7b9e1bd2faf3fbec5684
 # Install general packages
 RUN dnf install -y jq udisks2 zabbix-agent
 
+# Enable zabbix-agent
+RUN systemctl enable zabbix-agent
+
 # Ensure systemd replaced utilities are not installed
 RUN dnf remove -y NetworkManager
 
