@@ -1,5 +1,5 @@
 [Match]
-Name=bridge1
+OriginalName=bridge1
 
 [Link]
 MTUBytes=1570
