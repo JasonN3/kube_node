@@ -1,0 +1,10 @@
+version = "1.0"
+
+[install.filesystems.boot]
+mountpoint = "/boot"
+size = "1GiB"
+format = "ext4"
+
+[install.filesystems.root]
+mountpoint = "/"
+format = "xfs"
