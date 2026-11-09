@@ -1,4 +1,4 @@
-FROM quay.io/fedora/fedora-coreos:stable@sha256:6ee2695a5598631ee8cdcb89e165641b960d6acce043f13140e37f141821a40d
+FROM quay.io/fedora/fedora-coreos:stable@sha256:406c0b351cc860f778ab6a04c1d27b1cef3cdc1ea69b62cbdbce071b4881d8f9
 
 # Install general packages
 RUN dnf install -y jq udisks2 zabbix-agent
